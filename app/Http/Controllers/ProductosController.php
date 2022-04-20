@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Productos;
 use App\Proveedores;
+use Auth;
+use DB;
 use Illuminate\Http\Request;
 
-class ProveedoresController extends Controller
+class ProductosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +16,12 @@ class ProveedoresController extends Controller
      */
     public function index()
     {
-        $proveedores=Proveedores::all();
-        return view('proveedores.index')
-        ->with('proveedores',$proveedores);
+        $productos=DB::select("
+            SELECT * FROM producto pro
+            JOIN proveedor prove ON pro.prove_id=prove.prove_id
+        ");
+        return view('productos.index')
+        ->with('productos',$productos);
     }
 
     /**
@@ -25,8 +31,9 @@ class ProveedoresController extends Controller
      */
     public function create()
     {
-       return view('proveedores.create');
-
+        $proveedores=Proveedores::all();
+        return view('productos.create')
+        ->with('proveedores',$proveedores);
     }
 
     /**
@@ -38,8 +45,10 @@ class ProveedoresController extends Controller
     public function store(Request $request)
     {
         $data=$request->all();
-        Proveedores::create( $data);
-        return redirect(route('proveedores'));
+        //dd($data);
+        // $data['prove_id']=Auth::user()->prove_id;
+        Productos::create( $data);
+        return redirect(route('productos'));
     }
 
     /**
@@ -61,9 +70,9 @@ class ProveedoresController extends Controller
      */
     public function edit($id)
     {
-        $proveedores=Proveedores::find($id);
-        return view('proveedores.edit')
-        ->with('proveedores',$proveedores);
+        $productos=Productos::find($id);
+        return view('productos.edit')
+        ->with('productos',$productos);
     }
 
     /**
@@ -75,9 +84,9 @@ class ProveedoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Prove=Proveedores::find($id);
-        $Prove->update($request->all());
-        return redirect(route('proveedores'));
+        $Pro=Productos::find($id);
+        $Pro->update($request->all());
+        return redirect(route('productos'));
     }
 
     /**
@@ -88,7 +97,7 @@ class ProveedoresController extends Controller
      */
     public function destroy($id)
     {
-        Proveedores::destroy($id);
-        return redirect(route('proveedores'));
+        Productos::destroy($id);
+        return redirect(route('productos'));
     }
 }

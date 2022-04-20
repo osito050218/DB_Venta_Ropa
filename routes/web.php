@@ -38,3 +38,10 @@ Route::get('/proveedores/edit/{prove_id}','ProveedoresController@edit')->name('p
 Route::post('/proveedores/store','ProveedoresController@store')->name('proveedores.store');
 Route::post('/proveedores/update/{prove_id}','ProveedoresController@update')->name('proveedores.update');
 Route::post('/proveedores/destroy/{prove_id}','ProveedoresController@destroy')->name('proveedores.destroy');
+
+Route::get('productos','ProductosController@index')->name('productos');
+Route::get('/productos/create','ProductosController@create')->name('productos.create');
+Route::get('/productos/edit/{pro_id}','ProductosController@edit')->name('productos.edit');
+Route::post('/productos/store','ProductosController@store')->name('productos.store');
+Route::post('/productos/update/{pro_id}','ProductosController@update')->name('productos.update');
+Route::post('/productos/destroy/{pro_id}','ProductosController@destroy')->name('productos.destroy');
