@@ -6,6 +6,7 @@ use App\Proveedores;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
+//use Session;
 
 class ProductosController extends Controller
 {
@@ -16,6 +17,7 @@ class ProductosController extends Controller
      */
     public function index()
     {
+
         $productos=DB::select("
             SELECT * FROM producto pro
             JOIN proveedor prove ON pro.prove_id=prove.prove_id
@@ -97,7 +99,23 @@ class ProductosController extends Controller
      */
     public function destroy($id)
     {
-        Productos::destroy($id);
-        return redirect(route('productos'));
+
+
+        $factura=DB::select("SELECT * FROM factura_detalle where pro_id=$id");
+
+        if(empty($factura)){
+             $sms='Eliminado Correctamente';
+             Productos::destroy($id);
+        }else{
+             $sms='No se puede eliminar ya que tiene facturas';
+        }
+        //dd($sms);
+        //Session::put('sms',$sms);
+        echo "<h1 style='color:#9ACD32' >
+            $sms
+            <a href='".route('productos')."' style='color:#7B68EE'>Volver a productos</a>
+            <h1>";
+
+        //return redirect(route('productos'));
     }
 }

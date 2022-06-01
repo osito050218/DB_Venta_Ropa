@@ -14,7 +14,7 @@
 				<label for="">Direccion</label>
 				<input type="text" value="{{$proveedores->prove_direccion}}" class="form-control" name="prove_direccion" id="prove_direccion">
 				<label for="">Telefono</label>
-				<input type="text" value="{{$proveedores->prove_telefono}}" class="form-control" name="prove_telefono" id="prove_telefono">
+				<input type="number" value="{{$proveedores->prove_telefono}}" class="form-control" name="prove_telefono" id="prove_telefono">
 				<label for="">Producto</label>
 				<input type="text" value="{{$proveedores->prove_producto}}" class="form-control" name="prove_producto" id="prove_producto">
 				<label for="">Cantidad</label>

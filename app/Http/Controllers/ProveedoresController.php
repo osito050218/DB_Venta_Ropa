@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Proveedores;
 use Illuminate\Http\Request;
+use DB;
 
 class ProveedoresController extends Controller
 {
@@ -88,7 +89,22 @@ class ProveedoresController extends Controller
      */
     public function destroy($id)
     {
-        Proveedores::destroy($id);
-        return redirect(route('proveedores'));
+
+        $factura=DB::select("SELECT * FROM factura_detalle where pro_id=$id");
+
+        if(empty($factura)){
+             $sms='Eliminado Correctamente';
+             Proveedores::destroy($id);
+        }else{
+             $sms='No se puede eliminar ya que tiene facturas';
+        }
+        //dd($sms);
+        //Session::put('sms',$sms);
+        echo "<h1 style='color:#9ACD32' >
+            $sms
+            <a href='".route('proveedores')."' style='color:#7B68EE'>Volver a proveedores</a>
+            <h1>";
+
+        //return redirect(route('productos'));
     }
 }

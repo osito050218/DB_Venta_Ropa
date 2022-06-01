@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Clientes;
 use Illuminate\Http\Request;
+use DB;
 
 class ClientesController extends Controller
 {
@@ -13,6 +14,7 @@ class ClientesController extends Controller
      */
     public function index()
     {
+         
 
         $clientes=Clientes::all();
         return view('clientes.index')
@@ -27,6 +29,7 @@ class ClientesController extends Controller
     public function create()
     {
         return view('clientes.create');
+        
     }
 
     /**
@@ -88,8 +91,22 @@ class ClientesController extends Controller
      */
     public function destroy($id)
     {
-        Clientes::destroy($id);
-        return redirect(route('clientes'));
+        $factura=DB::select("SELECT * FROM facturas where cli_id=$id");
+
+        if(empty($factura)){
+             $sms="Eliminado Correctamente";
+             Clientes::destroy($id);
+        }else{
+             $sms="No se puede eliminar ya que tiene facturas";
+        }
+        // Session::put('sms',$sms);
+        // return redirect(route('clientes',1));
+        echo "<h1 style='color:#9ACD32' >
+            $sms
+            <a href='".route('clientes')."' style='color:#7B68EE'>Volver a clientes</a>
+            <h1>";
+
+        
     }
 }
 

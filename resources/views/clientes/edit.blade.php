@@ -12,13 +12,13 @@
 				<label for="">Apellido</label>
 				<input type="text" value="{{$clientes->cli_apellido}}" class="form-control" name="cli_apellido" id="cli_apellido">
 				<label for="">Cedula</label>
-				<input type="text" value="{{$clientes->cli_cedula}}" class="form-control" name="cli_cedula" id="cli_cedula">
+				<input type="number" value="{{$clientes->cli_cedula}}" class="form-control" name="cli_cedula" id="cli_cedula">
 				<label for="">Telefono</label>
-				<input type="text" value="{{$clientes->cli_telefono}}" class="form-control" name="cli_telefono" id="cli_telefono">
+				<input type="number" value="{{$clientes->cli_telefono}}" class="form-control" name="cli_telefono" id="cli_telefono">
 				<label for="">Direccion</label>
 				<input type="text" value="{{$clientes->cli_direccion}}" class="form-control" name="cli_direccion" id="cli_direccion">
 				<br>
-				<button type="submit" class="btn btn-success">Guardar</button>
+				<button type="submit" class="btn btn-success"> Guardar</button>
 			</div>
 		</div>
 	</div>	
